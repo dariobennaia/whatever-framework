@@ -1,0 +1,13 @@
+version: '3'
+services:
+   composer:
+     image: fabricainfo/assinatura_digital:1.0
+     container_name: composer
+     volumes:
+       - ./:/var/www/html/
+     ports:
+       - 80:80
+     working_dir: "/var/www/html"
+     restart: always
+     stdin_open: true
+     tty: true
