@@ -14,7 +14,7 @@ services:
      tty: true
 
    web:
-     image: fabricainfo/assinatura_digital:1.0
+     image: dariosantos/mini_framework:1.0
      container_name: web
      volumes:
        - ./:/var/www/html/
