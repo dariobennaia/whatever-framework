@@ -1,18 +1,11 @@
 # Backend - Autoescola
 
-Api do projeto autoescola criado em [Laravel 5.7](https://laravel.com/). Desenvolvido por Fabricainfo.
+Mini framework para testes, usando Silex e Twig. Desenvolvido por Dário Santos.
 
 ## Pré requisitos:
 
-- PHP >= 7.1.3
-- OpenSSL PHP Extension
+- PHP >= 5.6
 - PDO PHP Extension
-- Mbstring PHP Extension
-- Tokenizer PHP Extension
-- XML PHP Extension
-- Ctype PHP Extension
-- JSON PHP Extension
-- BCMath PHP Extension
 - Docker >= 18.06.1-ce
 
 ## Navegadores
@@ -20,24 +13,18 @@ Api do projeto autoescola criado em [Laravel 5.7](https://laravel.com/). Desenvo
 
 ## Instalação
 
-Para instalar a Api do projeto autoescola basta seguir os passos abaixo:
+Para instalar a aplicação basta seguir os passos abaixo:
 
 ```
 # clone o repositorio
-$ git clone <link> backend-autoescola
+$ git clone <link> <path>
 
-# Entre no repositório criado e crie o docker-compose.yml. Já existe um modelo (docker-compose.default.yml):
-$ cd front-autoescola
-$ sudo cp docker-compose.default.yml docker-compose.yml
+# Entre no repositório criado.
+$ cd <path>
 
-# Crie o container da Api e instale as dependencias.
+# Crie o container e instale as dependencias.
 $ sudo docker-compose up -d
-$ sudo docker-compose exec autoescola-backend composer install
-$ sudo docker-compose exec autoescola-backend chmod 777 -R vendor
 
-# Execute o comando abaixo para configurar a Api.
-$ sudo docker-compose exec autoescola-backend php artisan sistema 
-
-# Após a configuração basta rodar a Api.
+# Após a configuração basta rodar a aplicação.
 $ http://localhost:8000
 ```
