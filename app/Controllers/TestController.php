@@ -9,69 +9,108 @@
 namespace App\Controllers;
 
 use App\Models\Teste;
+use Symfony\Component\HttpFoundation\Request;
 
 class TestController extends Controller
 {
-    public function teste()
-    {
-        return $this->rederView('cadastro', [
-            'name' => ['asdsad', 'asqqweq'],
-        ]);
-    }
-
+    /**
+     * @return mixed|string
+     */
     public function index()
     {
         try {
             $a = new Teste();
-            return $a->all();
+            return $this->rederView('listagem', ['dados'=>$a->all()]);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function store()
+    /**
+     * @return mixed
+     */
+    public function create()
+    {
+        return $this->rederView('formulario');
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function store(Request $request)
     {
         try {
             $a = new Teste();
-            return $a->create([
-                'nome'=>'dario',
-                'idade'=>'22'
+            $a->create([
+                'nome'=>$request->get('nome'),
+                'idade'=>$request->get('idade')
             ]);
+            return json_encode(['sucesso'=>true,'msg'=>'Sucesso!']);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return json_encode(['sucesso'=>false,'msg'=>$e->getMessage()]);
         }
     }
 
-    public function update($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function formAtualizar($id)
     {
         try {
             $a = new Teste();
-            return $a->update($id,[
-                'nome'=>'dario',
-                'idade'=>'22'
-            ]);
+            return $this->rederView('formulario', ['dados'=>$a->find($id),'form_start'=>'']);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return $this->rederView('formulario', ['sucesso'=>false,'msg'=>$e->getMessage()]);
         }
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return string
+     */
+    public function update($id, Request $request)
+    {
+        try {
+            $a = new Teste();
+            $a->update($id, [
+                'nome'=>$request->get('nome'),
+                'idade'=>$request->get('idade')
+            ]);
+            return json_encode(['sucesso'=>true,'msg'=>'Sucesso!']);
+        } catch (\Exception $e) {
+            return json_encode(['sucesso'=>false,'msg'=>$e->getMessage()]);
+        }
+    }
+
+    /**
+     * @param string $id
+     * @return string
+     */
     public function delete($id)
     {
         try {
             $a = new Teste();
-            return $a->delete($id);
+            $a->delete($id);
+            return json_encode(['sucesso'=>true,'msg'=>'Sucesso!']);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return json_encode(['sucesso'=>false,'msg'=>$e->getMessage()]);
         }
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function show($id)
     {
         try {
             $a = new Teste();
-            return $a->find($id);
+            return json_encode(['sucesso'=>true,'msg'=>'Sucesso!', 'dados'=>$a->find($id)]);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return json_encode(['sucesso'=>false,'msg'=>$e->getMessage()]);
         }
     }
 }

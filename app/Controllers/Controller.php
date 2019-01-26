@@ -29,7 +29,7 @@ class Controller extends Application
      * @param array|null $params
      * @return mixed
      */
-    protected function rederView($path, array $params = null)
+    protected function rederView($path, array $params = [])
     {
         return $this['twig']->render($path.'.twig', $params);
     }
