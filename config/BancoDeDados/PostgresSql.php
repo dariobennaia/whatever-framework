@@ -11,11 +11,11 @@ namespace Config\BancoDeDados;
 class PostgresSql implements BancoDeDados
 {
 
-    const HOST = "192.168.1.13";
+    const HOST = "postgres-web";
     const PORT = "5432";
     const USER = "postgres";
     const PASS = "senha";
-    const DB   = "teste";
+    const DB   = "aplicacao";
 
     /**
      * @return \PDO|string

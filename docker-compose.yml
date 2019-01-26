@@ -1,12 +1,27 @@
 version: '3'
 services:
-   composer:
-     image: fabricainfo/assinatura_digital:1.0
-     container_name: composer
+   postgres-web:
+     image: postgres:9.6
+     container_name: postgres-web
+     ports:
+       - 5432:5432
+     environment:
+       POSTGRES_DB: aplicacao
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: senha
+     restart: always
+     stdin_open: true
+     tty: true
+
+   web:
+     image: dariosantos/mini_framework:1.0
+     container_name: web
      volumes:
        - ./:/var/www/html/
      ports:
-       - 80:80
+       - 8000:80
+     links:
+       - postgres-web:postgres-web
      working_dir: "/var/www/html"
      restart: always
      stdin_open: true
