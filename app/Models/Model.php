@@ -60,7 +60,7 @@ abstract class Model extends Conexao
                 $return[] = $row;
             }
 
-            return $return;
+            return $return[0];
         } catch (\Exception $e) {
             echo $e->getMessage();
             return $return;
