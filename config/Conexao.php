@@ -20,11 +20,18 @@ abstract class Conexao
         $this->con = $this->conecta($banco);
     }
 
+    /**
+     * @param BancoDeDados $bd
+     * @return mixed
+     */
     private function conecta(BancoDeDados $bd)
     {
         return $bd->conexao();
     }
 
+    /**
+     * @return mixed
+     */
     protected function getCon()
     {
         return $this->con;
