@@ -1,6 +1,6 @@
-# Backend - Autoescola
+# Whatever-framework
 
-Mini framework para testes, usando Silex e Twig. Desenvolvido por Dário Santos.
+Mini framework para testes, usando Silex, Twig e Docker. Desenvolvido por Dário Santos.
 
 ## Pré requisitos:
 
