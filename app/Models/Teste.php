@@ -14,8 +14,22 @@ class Teste extends Model
     function __construct()
     {
         parent::__construct();
-        $this->table = "teste";
+        $this->table = "aplicacao";
         $this->primaryKey = "id";
         $this->atributos = ['nome','idade'];
+        $this->createIfNotExists();
+    }
+
+    private function createIfNotExists()
+    {
+        $this->getCon()->query(
+            "CREATE TABLE public.aplicacao
+            (
+               id serial NOT NULL,
+               nome character varying(100),
+               idade character varying(100),
+               CONSTRAINT pk_id PRIMARY KEY (id)
+            )"
+        );
     }
 }
