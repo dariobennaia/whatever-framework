@@ -1,0 +1,44 @@
+{%  extends 'template.twig' %}
+
+{% block titulo %}
+    Novo
+{% endblock %}
+
+{% block conteudo %}
+    <br>
+    <div class="col-md-12">
+        <a href="/" class="btn btn-primary float-right">Listagem</a>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <form method="post" action="javascript:void(0)" id="form">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" placeholder="Nome" id="nome" name="nome" autocomplete="off" value="{{ dados.nome?dados.nome:null }}">
+            </div>
+            <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" class="form-control" placeholder="Idade" id="idade" name="idade" autocomplete="off" value="{{ dados.idade?dados.idade:null}}">
+            </div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#form').submit(function () {
+            $.ajax({
+                url: '{{ dados.id?'/update/'~dados.id: '/store'}}',
+                type: '{{ dados.id?'PATCH': 'POST'}}',
+                data: $(this).serialize(),
+                success: function(data) {
+                    var dados = JSON.parse(data)
+                    alert(dados.msg)
+                    window.location = '/'
+                }
+            });
+            return false;
+        })
+    </script>
+{% endblock %}

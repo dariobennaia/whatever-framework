@@ -1,0 +1,81 @@
+{%  extends 'template.twig' %}
+
+{% block titulo %}
+    Listagem
+{% endblock %}
+
+{% block conteudo %}
+    <br>
+    <div class="col-md-12">
+        <a href="/novo" class="btn btn-primary float-right">Novo</a>
+    </div>
+    <br><br>
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Idade</th>
+                <th scope="col">-</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for value in dados %}
+                <tr>
+                    <th scope="row">{{ value.id }}</th>
+                    <td>{{ value.nome }}</td>
+                    <td>{{ value.idade }}</td>
+                    <td>
+                        <span class="float-right">
+                            <a href="/atualizar/{{ value.id }}" class="btn btn-warning text-white">Atualizar</a>
+                            <button onclick="deleteObject('{{ value.id }}')" class="btn btn-danger">Excluir</button>
+                            <button onclick="infoObject('{{ value.id }}')" class="btn btn-info">Informações</button>
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        /**
+         *
+         **/
+        function deleteObject(id)
+        {
+            $.ajax({
+                url: '/delete/'+id,
+                type: 'delete',
+                success: function (data) {
+                    var dados = JSON.parse(data)
+                    alert(dados.msg)
+                    window.location = '/'
+                }
+            });
+            return false;
+        }
+
+        /**
+         * @param id
+         * @returns {boolean}
+         */
+        function infoObject(id)
+        {
+            $.ajax({
+                url: '/'+id,
+                type: 'get',
+                success: function (data) {
+                    var dados = JSON.parse(data)
+                    alert('Nome: '+dados.dados.nome+'\n Idade: '+dados.dados.idade)
+                }
+            });
+            return false;
+        }
+    </script>
+{% endblock %}
